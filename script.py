@@ -49,6 +49,11 @@ def link_json_to_schema(event: str, log: list):
 
 
 def json_validation(data: dict, schema: dict, log: list):
+    """
+    Валидация данных.
+    Принимает json-данные, схему для проверки
+    и список для дальнейшего логгирования
+    """
     result_errors_list = []
     validator = Draft7Validator(schema)
     errors = validator.iter_errors(data['data'])
@@ -78,6 +83,8 @@ for file in files:
                 if schema:
                     json_validation(data, schema, log_data)
 
+
+# удаляем лишние символы
 result = []
 for i in log_data:
     if isinstance(i[1], list):
